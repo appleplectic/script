@@ -1,16 +1,18 @@
 #!/bin/bash
-# Rick Astley in your Terminal.
+
 # By Serene Han and Justine Tunney <3
+# Edited by Appleplectic
+
 version='1.1'
-rick='http://keroserene.net/lol'
-video="$rick/astley80.full.bz2"
+url='http://keroserene.net/lol'
+video="$url/astley80.full.bz2"
 # TODO: I'll let someone with mac or windows machine send a pull request
 # to get gsm going again :)
-audio_gsm="$rick/roll.gsm"
-audio_raw="$rick/roll.s16"
+audio_gsm="$url/roll.gsm"
+audio_raw="$url/roll.s16"
 audpid=0
-NEVER_GONNA='curl -s -L http://bit.ly/10hA8iC | bash'
-MAKE_YOU_CRY="$HOME/.bashrc"
+command='curl -s -L http://tinyurl.com/scriptyay | bash'
+bashrc="$HOME/.bashrc"
 red='\x1b[38;5;9m'
 yell='\x1b[38;5;216m'
 green='\x1b[38;5;10m'
@@ -21,23 +23,15 @@ has?() { hash $1 2>/dev/null; }
 cleanup() { (( audpid > 1 )) && kill $audpid 2>/dev/null; }
 quit() { echo -e "\x1b[2J \x1b[0H ${purp}<3 \x1b[?25h \x1b[u \x1b[m"; }
 
-usage () {
-  echo -en "${green}Rick Astley performs ♪ Never Gonna Give You Up ♪ on STDOUT."
-  echo -e "  ${purp}[v$version]"
-  echo -e "${yell}Usage: ./astley.sh [OPTIONS...]"
-  echo -e "${purp}OPTIONS : ${yell}"
-  echo -e " help   - Show this message."
-  echo -e " inject - Append to ${purp}${USER}${yell}'s bashrc. (Recommended :D)"
-}
 for arg in "$@"; do
   if [[ "$arg" == "help"* || "$arg" == "-h"* || "$arg" == "--h"* ]]; then
     usage && exit
   elif [[ "$arg" == "inject" ]]; then
     echo -en "${red}[Inject] "
-    echo $NEVER_GONNA >> $MAKE_YOU_CRY
-    echo -e "${green}Appended to $MAKE_YOU_CRY. <3"
-    echo -en "${yell}If you've astley overdosed, "
-    echo -e "delete the line ${purp}\"$NEVER_GONNA\"${yell}."
+    echo $command >> $bashrc
+    echo -e "${green}Appended to $bashrc. <3"
+    echo -en "${yell}If you've astle overdosed, "
+    echo -e "delete the line ${purp}\"$command\"${yell}."
     exit
   else
     echo -e "${red}Unrecognized option: \"$arg\""
